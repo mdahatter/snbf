@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+	<definition name="portlet.ideas" path="/template.jsp">
+		<put name="portlet_content" value="" />
+		<put name="portlet_decorate" value="true" />
+		<put name="portlet_padding" value="true" />
+	</definition>
+	
+	<definition name="portlet.ideas.edit" extends="portlet.ideas">
+		<put name="portlet_content" value="/html/edit.jsp" />
+	</definition>
+	
+
+	<definition name="portlet.ideas.edit_message" extends="portlet.ideas">
+		<put name="portlet_content" value="/html/edit_message.jsp" />
+	</definition>
+
+	<definition name="portlet.ideas.error" extends="portlet.ideas">
+		<put name="portlet_content" value="/html/error.jsp" />
+	</definition>
+
+	<definition name="portlet.ideas.view" extends="portlet.ideas">
+		<put name="portlet_content" value="/html/view.jsp" />
+	</definition>
+
+	<definition name="portlet.ideas.view_message" extends="portlet.ideas">
+		<put name="portlet_content" value="/html/view_message.jsp" />
+	</definition>
+	
+</tiles-definitions>
