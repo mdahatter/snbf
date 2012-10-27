@@ -1,0 +1,172 @@
+<div class="message-container" style="margin-left: <%= depth * 10 %>px;">
+	<a id="<portlet:namespace />message_<%= message.getMessageId() %>"></a>
+
+	<table class="thread-message-view <%= className %>" id="<portlet:namespace />message_<%= message.getMessageId() %>" width="100%">
+	<tr>
+		<td class="lfr-top">
+			<div class="thread-top float-container">
+				<div class="subject">
+					<strong><%= HtmlUtil.escape(message.getSubject()) %></strong>&nbsp;&nbsp;&nbsp;(<%=HtmlUtil.escape(PortalUtil.getUserName(
+																		message.getUserId(),
+																		message.getUserName()))%>)
+
+					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
+
+					<c:if test="<%= (message != null) && !message.isApproved() %>">
+						<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
+
+						<aui:workflow-status status="<%= message.getStatus() %>" />
+					</c:if>
+
+					<%
+					MBMessage parentMessage = null;
+
+					try {
+						parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
+					}
+					catch (Exception e) {}
+					%>
+
+					<c:if test="<%= parentMessage != null %>">
+
+						<%
+						PortletURL parentMessageURL = renderResponse.createRenderURL();
+
+						parentMessageURL.setParameter("struts_action", "/ideas/view_message");
+						parentMessageURL.setParameter("messageId", String.valueOf(parentMessage.getMessageId()));
+
+						String author = parentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(parentMessage.getUserId(), parentMessage.getUserName()));
+						%>
+
+						<%= LanguageUtil.format(pageContext, "posted-as-a-reply-to", author) %>
+					</c:if>
+				</div>
+
+				<c:if test="<%= editable %>">
+
+					<%
+					boolean showAnswerFlag = false;
+					boolean hasReplyPermission = MBCategoryPermission.contains(permissionChecker, scopeGroupId, message.getCategoryId(), ActionKeys.REPLY_TO_MESSAGE);
+
+					if (!message.isRoot()) {
+						MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+
+						showAnswerFlag = MBMessagePermission.contains(permissionChecker, rootMessage, ActionKeys.UPDATE) && !message.isAnswer() && (thread.isQuestion() || MBThreadLocalServiceUtil.hasAnswerMessage(thread.getThreadId()));
+					}
+					%>
+
+					<c:if test="<%= showAnswerFlag || hasReplyPermission %>">
+						<ul class="edit-controls lfr-component">
+							<li class="<%= showAnswerFlag ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
+
+								<%
+								String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
+								%>
+
+								<liferay-ui:icon
+									image="checked"
+									label="<%= true %>"
+									message="mark-as-an-answer"
+									url="<%= taglibMarkAsAnswerURL %>"
+								/>
+							</li>
+
+							<c:if test="<%= hasReplyPermission && !thread.isLocked() %>">
+								<li>
+									<portlet:renderURL var="replyURL">
+										<portlet:param name="struts_action" value="/ideas/edit_message" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+										<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+										<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+									</portlet:renderURL>
+
+									<liferay-ui:icon
+										image="reply"
+										label="<%= true %>"
+										url="<%= replyURL %>"
+									/>
+								</li>
+							</c:if>
+						</ul>
+					</c:if>
+				</c:if>
+			</div>
+
+			<div class="thread-body">
+
+				<%
+				String msgBody = StringPool.BLANK;
+
+				if (message.isFormatBBCode()) {
+					msgBody = BBCodeTranslatorUtil.getHTML(message.getBody());
+					msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
+				}
+				else{
+					msgBody = message.getBody();
+				}
+				%>
+
+				<%= msgBody %>
+
+			</div>
+		</td>
+	</tr>
+
+	<c:if test="<%= editable %>">
+		<tr>
+			<td class="thread-bottom">
+				<c:if test="<%= enableRatings %>">
+					<liferay-ui:ratings
+						className="<%= MBMessage.class.getName() %>"
+						classPK="<%= message.getMessageId() %>"
+						type="thumbs"
+					/>
+				</c:if>
+
+				<br />
+
+				<div class="entry-links">
+					<liferay-ui:asset-links
+						className="<%= MBMessage.class.getName() %>"
+						classPK="<%= message.getMessageId() %>"
+					/>
+				</div>
+
+				<ul class="edit-controls lfr-component">
+					<li>
+
+						<%
+						String topHREF = "#" + renderResponse.getNamespace() + "message_0";
+						%>
+
+						<liferay-ui:icon
+							image="top"
+							label="<%= true %>"
+							url="<%= topHREF %>"
+						/>
+					</li>
+
+					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) && !thread.isLocked() %>">
+						<li>
+							<portlet:renderURL var="editURL">
+								<portlet:param name="struts_action" value="/ideas/edit_message" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+							</portlet:renderURL>
+
+							<liferay-ui:icon
+								image="edit"
+								label="<%= true %>"
+								url="<%= editURL %>"
+							/>
+						</li>
+					</c:if>
+
+				</ul>
+			</td>
+		</tr>
+	</c:if>
+
+	</table>
+</div>
