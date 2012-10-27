@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title - $company_name</title>
+
+	$theme.include($top_head_include)
+</head>
+
+<body class="$css_class">
+<div id="bkgNinos"></div>
+
+$theme.include($body_top_include)
+
+#if ($is_signed_in)
+	#dockbar()
+#end
+
+<div id="wrapper">
+  <div id="logo"></div>
+  <div id="logoICBF"></div>
+	<a href="#main-content" id="skip-to-content">#language("skip-to-content")</a>
+	<div id="content">
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+	</div>
+	<div id="content">
+	</div>
+
+	<footer id="footer" role="contentinfo">
+	    <p>Todos los derechos reservados - Instituto de Bienestar Familiar Colombia 2012.<br/>
+	      PBX: (57 1) 4377630 - L&iacute;nea gratuita nacional ICBF: 018000 91 80 80.<br/>
+	      L&iacute;nea de prevenci&oacute;n abuso sexual: 018000 11 2440 (disponibles de lunes a domingo, las 24 horas).</p>
+	</footer>
+	<div id="share">
+	    <div class="btShareYoutube"><a href="#"></a></div>
+	    <div class="btShareTwitter"><a href="#"></a></div>
+	    <div class="btShareFacebook"><a href="#"></a></div>
+	</div>
+</div>
+
+$theme.include($body_bottom_include)
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>
