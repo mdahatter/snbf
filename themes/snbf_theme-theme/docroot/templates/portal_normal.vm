@@ -34,9 +34,6 @@ $theme.include($body_top_include)
 			$theme.wrapPortlet("portlet.vm", $content_include)
 		#end
 	</div>
-	<div id="content">
-	</div>
-
 	<footer id="footer" role="contentinfo">
 	    <p>Todos los derechos reservados - Instituto de Bienestar Familiar Colombia 2012.<br/>
 	      PBX: (57 1) 4377630 - L&iacute;nea gratuita nacional ICBF: 018000 91 80 80.<br/>
