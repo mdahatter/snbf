@@ -141,14 +141,33 @@
 .btRegistroNinos a:hover{
 	background-position:0 -75px;
 }
+.btParticipar a{
+	width:96px;
+	height:35px;
+	background-image: url(../images/btParticipar.png);
+	background-repeat: no-repeat;
+}
+.btParticipar a:hover{
+	background-position:0 -70px;
 
+}
 .idea {
 	border-bottom:#CCC 1px dotted;
 	padding: 10px 0 20px 0;
 }
-.idea h1, .idea h2, .idea h3, .idea p, .idea span, .idea ul{
+.idea h1, .idea h2, .idea h3, .celdasTit, .camposLogin, .celdasTitnegro, .btStandard, .celdasTitnegropeq, .idea p, .idea span, .idea ul{
 	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
 }
+
+.celdasTit{
+	color: #009900;
+	font-size: 14px;
+}
+.celdasTitnegro{
+	color: #5F5F5F;
+	font-size: 14px;
+}
+
 .idea h1 {
 	font-size:20px;
 	color:#009900;
@@ -206,6 +225,73 @@
 	background-position:0 -27px;
 }
 
+.checkbox {
+	margin:0;
+	padding:0;
+	vertical-align:top;
+}
+.camposLogin {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:290px;
+	height:18px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+
+.textarea {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:650px;
+	height:100px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.texidea {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:650px;
+	height:20px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.dropdown {
+	color: #333333;
+	font-size: 13px;
+	height:20px;
+	float:left;
+	border: 1px #B9BABD inset;
+}
+.backtables {
+	background-color: #F4F4F4;
+}
+.btStandard {
+	color:#FFF;
+	font-size:14px;
+	width:95px;
+	height:35px;
+	background-image: url(../images/btCancelar_v1.png);
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.btStandard a:hover{
+	background-position:0 -70px;
+}	
 /*FOOTER*/
 #footer {
 	width:590px;
