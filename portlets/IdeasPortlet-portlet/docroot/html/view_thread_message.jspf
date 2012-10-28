@@ -6,7 +6,7 @@
 			<div class="idea">
 				<!-- Inicio hook AM -->
 				<h1><%=	message.getSubject()%></h1>
-				<h2><%=HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(),message.getUserName()))%> | <%=dateFormatDateTime.format(message.getModifiedDate())%></h2>
+				<h2><%=HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(),message.getUserName()))%> | <%=dateFormatDateTime.format(message.getCreateDate())%></h2>
 						<portlet:renderURL var="replyURL">
 							<portlet:param name="struts_action" value="/ideas/edit_message" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />

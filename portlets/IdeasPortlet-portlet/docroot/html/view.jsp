@@ -51,23 +51,24 @@
 
 <liferay-util:include page="/top_links.jsp" />
 
-<c:choose>
-	<c:when test='<%=topLink.equals("ideas-home")%>'>
-
-
+<div class="contNinos">
+	<img src="/IdeasPortlet-portlet/images/titIdeasNinos.png" width="453"
+		height="77" />
+	<div class="btMasVotadas">
 		<%
-			System.out.println("categoryId" + categoryId);
+		portletURL.setParameter("topLink", "ideas-home");
 		%>
-		<div class="contNinos">
-			<img src="/IdeasPortlet-portlet/images/titIdeasNinos.png" width="453"
-				height="77" />
-			<div class="btMasVotadas">
-				<a href=""></a>
-			</div>
-			<div class="btRecientes">
-				<a href=""></a>
-			</div>
-			<div class="contScroll">
+		<a href="<%= (topLink.equals("ideas-home") && catId == 0) ? StringPool.BLANK : portletURL.toString() %>"></a>
+	</div>
+	<div class="btRecientes">
+		<%
+		portletURL.setParameter("topLink", "recent-posts");
+		%>
+		<a href="<%= topLink.equals("recent-posts") ? StringPool.BLANK : portletURL.toString() %>"></a>
+	</div>
+	<div class="contScroll">
+		<c:choose>
+			<c:when test='<%=topLink.equals("ideas-home")%>'>
 				<liferay-ui:panel-container extended="<%=false%>"
 					id="messageBoardsPanelContainer" persistState="<%=true%>">
 
@@ -102,25 +103,17 @@
 								<%
 									MBMessage message = null;
 
-															try {
-																message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
-															} catch (NoSuchMessageException nsme) {
+									try {
+										message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+									} catch (NoSuchMessageException nsme) {
 
-																message = new MBMessageImpl();
+										message = new MBMessageImpl();
 
-																row.setSkip(true);
-															}
+										row.setSkip(true);
+									}
 
-															message = message.toEscapedModel();
-
-															//												row.setBold(!MBThreadFlagLocalServiceUtil
-															//														.hasThreadFlag(themeDisplay
-															//																.getUserId(), thread));
-															row.setObject(new Object[] { message });
-															//												row.setRestricted(!MBMessagePermission
-															//														.contains(permissionChecker,
-															//																message,
-															//																ActionKeys.VIEW));
+									message = message.toEscapedModel();
+									row.setObject(new Object[] { message });
 								%>
 
 								<liferay-portlet:renderURL varImpl="rowURL">
@@ -133,18 +126,18 @@
 									<h1><%=message.getSubject()%></h1>
 									<h2><%=HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName()))%>
 										|
-										<%=dateFormatDateTime.format(message.getModifiedDate())%></h2>
+										<%=dateFormatDateTime.format(message.getCreateDate())%></h2>
 									<p>
 										<%
 											String msgBody = StringPool.BLANK;
 
-																	if (message.isFormatBBCode()) {
-																		msgBody = BBCodeTranslatorUtil.getHTML(message.getBody());
-																		msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages()
-																				+ "/emoticons");
-																	} else {
-																		msgBody = message.getBody();
-																	}
+											if (message.isFormatBBCode()) {
+												msgBody = BBCodeTranslatorUtil.getHTML(message.getBody());
+												msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages()
+														+ "/emoticons");
+											} else {
+												msgBody = message.getBody();
+											}
 										%>
 										<%=msgBody%>&nbsp;<a href="<%=rowURL%>"><%=LanguageUtil.get(pageContext, "more")%>&raquo;</a>
 									</p>
@@ -183,50 +176,26 @@
 							<liferay-ui:search-iterator />
 						</liferay-ui:search-container>
 					</liferay-ui:panel>
-
-
-
 				</liferay-ui:panel-container>
-			</div>
-			<c:choose>
-				<c:when test="<%=themeDisplay.isSignedIn()%>">
-					<portlet:renderURL var="editMessageURL">
-						<portlet:param name="struts_action" value="/ideas/edit_message" />
-						<portlet:param name="redirect" value="<%=currentURL%>" />
-						<portlet:param name="mbCategoryId" value="<%=categoryId%>" />
-					</portlet:renderURL>
-					<div class="btRegistroNinos">
-						<a href="<%=editMessageURL%>"></a>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="btRegistroNinos">
-						<a
-							href="<%=PortalUtil.getCreateAccountURL(request, themeDisplay)%>"></a>
-					</div>
-				</c:otherwise>
-			</c:choose>
-		</div>
+
 		<%
-			System.out.println(category);
+			if (category != null) {
+				PortalUtil.setPageSubtitle(category.getName(), request);
+				PortalUtil.setPageDescription(category.getDescription(), request);
 
-					if (category != null) {
-						PortalUtil.setPageSubtitle(category.getName(), request);
-						PortalUtil.setPageDescription(category.getDescription(), request);
-
-						MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
-					}
+				MBUtil.addPortletBreadcrumbEntries(category, request, renderResponse);
+			}
 		%>
 
-	</c:when>
+			</c:when>
 	<c:when test='<%=topLink.equals("recent-posts")%>'>
 
 		<%
 			long groupThreadsUserId = ParamUtil.getLong(request, "groupThreadsUserId");
 
-					if (groupThreadsUserId > 0) {
-						portletURL.setParameter("groupThreadsUserId", String.valueOf(groupThreadsUserId));
-					}
+			if (groupThreadsUserId > 0) {
+				portletURL.setParameter("groupThreadsUserId", String.valueOf(groupThreadsUserId));
+			}
 		%>
 
 		<c:if
@@ -245,31 +214,31 @@
 			<%
 				String emptyResultsMessage = null;
 
-							if (topLink.equals("recent-posts")) {
-								emptyResultsMessage = "there-are-no-recent-posts";
-							}
+				if (topLink.equals("recent-posts")) {
+					emptyResultsMessage = "there-are-no-recent-posts";
+				}
 
-							searchContainer.setEmptyResultsMessage(emptyResultsMessage);
+				searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 			%>
 
 			<liferay-ui:search-container-results>
 
 				<%
 					if (topLink.equals("recent-posts")) {
-										Calendar calendar = Calendar.getInstance();
+						Calendar calendar = Calendar.getInstance();
 
-										int offset = GetterUtil.getInteger(recentPostsDateOffset);
+						int offset = GetterUtil.getInteger(recentPostsDateOffset);
 
-										calendar.add(Calendar.DATE, -offset);
+						calendar.add(Calendar.DATE, -offset);
 
-										results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, calendar.getTime(),
-												WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
-										total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, calendar.getTime(),
-												WorkflowConstants.STATUS_APPROVED);
-									}
+						results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, calendar.getTime(),
+								WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+						total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, calendar.getTime(),
+								WorkflowConstants.STATUS_APPROVED);
+					}
 
-									pageContext.setAttribute("results", results);
-									pageContext.setAttribute("total", total);
+					pageContext.setAttribute("results", results);
+					pageContext.setAttribute("total", total);
 				%>
 
 			</liferay-ui:search-container-results>
@@ -281,21 +250,19 @@
 				<%
 					MBMessage message = null;
 
-									try {
-										message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
-									} catch (NoSuchMessageException nsme) {
-										//_log.error("Thread requires missing root message id " + thread.getRootMessageId());
+					try {
+						message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+					} catch (NoSuchMessageException nsme) {
+						//_log.error("Thread requires missing root message id " + thread.getRootMessageId());
 
-										message = new MBMessageImpl();
+						message = new MBMessageImpl();
 
-										row.setSkip(true);
-									}
+						row.setSkip(true);
+					}
 
-									message = message.toEscapedModel();
+					message = message.toEscapedModel();
 
-									row.setBold(!MBThreadFlagLocalServiceUtil.hasThreadFlag(themeDisplay.getUserId(), thread));
-									row.setObject(new Object[] { message, threadSubscriptionClassPKs });
-									row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
+					row.setObject(new Object[] { message, threadSubscriptionClassPKs });
 				%>
 
 				<liferay-portlet:renderURL varImpl="rowURL">
@@ -303,26 +270,60 @@
 					<portlet:param name="messageId"
 						value="<%=String.valueOf(message.getMessageId())%>" />
 				</liferay-portlet:renderURL>
+				<div class="idea">
+					<!-- Inicio hook AM -->
+					<h1><%=message.getSubject()%></h1>
+					<h2><%=HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName()))%>
+						|
+						<%=dateFormatDateTime.format(message.getCreateDate())%></h2>
+					<p>
+						<%
+							String msgBody = StringPool.BLANK;
 
-				<liferay-ui:search-container-column-text buffer="buffer"
-					href="<%=rowURL%>" name="thread">
-
-					<%
-						buffer.append(message.getSubject());
-					%>
-
-				</liferay-ui:search-container-column-text>
-
-				<!-- 
-<%--@ include file="/html/portlet/message_boards/user_thread_columns_last_post.jspf" %>
-
-<%@ include file="/html/portlet/message_boards/user_thread_columns_action.jspf" --%>			
- -->
+													if (message.isFormatBBCode()) {
+														msgBody = BBCodeTranslatorUtil.getHTML(message.getBody());
+														msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages()
+																+ "/emoticons");
+													} else {
+														msgBody = message.getBody();
+													}
+						%>
+						<%=msgBody%>&nbsp;<a href="<%=rowURL%>"><%=LanguageUtil.get(pageContext, "more")%>&raquo;</a>
+					</p>
+					<c:choose>
+						<c:when test="<%=themeDisplay.isSignedIn()%>">
+							<portlet:renderURL var="replyURL">
+								<portlet:param name="struts_action"
+									value="/ideas/edit_message" />
+								<portlet:param name="redirect" value="<%=currentURL%>" />
+								<portlet:param name="mbCategoryId"
+									value="<%=String.valueOf(message.getCategoryId())%>" />
+								<portlet:param name="threadId"
+									value="<%=String.valueOf(message.getThreadId())%>" />
+								<portlet:param name="parentMessageId"
+									value="<%=String.valueOf(message.getMessageId())%>" />
+							</portlet:renderURL>
+							<div class="btComentar">
+								<a href="<%=replyURL%>"></a>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="btComentar">
+								<a
+									href="<%=PortalUtil.getCreateAccountURL(request, themeDisplay)%>"></a>
+							</div>
+						</c:otherwise>
+					</c:choose>
+					Comentarios:
+					<%=String.valueOf(thread.getMessageCount())%>
+					<br />
+					<liferay-ui:ratings className="<%=MBMessage.class.getName()%>"
+						classPK="<%=message.getMessageId()%>" type="thumbs" />
+				</div>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator />
 		</liferay-ui:search-container>
-
 
 		<%
 			PortalUtil.setPageSubtitle(LanguageUtil.get(pageContext, StringUtil.replace(topLink, StringPool.UNDERLINE, StringPool.DASH)),
@@ -330,6 +331,25 @@
 					PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(topLink, TextFormatter.O)),
 							portletURL.toString());
 		%>
-
 	</c:when>
 </c:choose>
+	</div>
+	<c:choose>
+		<c:when test="<%=themeDisplay.isSignedIn()%>">
+			<portlet:renderURL var="editMessageURL">
+				<portlet:param name="struts_action" value="/ideas/edit_message" />
+				<portlet:param name="redirect" value="<%=currentURL%>" />
+				<portlet:param name="mbCategoryId" value="<%=categoryId%>" />
+			</portlet:renderURL>
+			<div class="btRegistroNinos">
+				<a href="<%=editMessageURL%>"></a>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="btRegistroNinos">
+				<a
+					href="<%=PortalUtil.getCreateAccountURL(request, themeDisplay)%>"></a>
+			</div>
+		</c:otherwise>
+	</c:choose>
+</div>
