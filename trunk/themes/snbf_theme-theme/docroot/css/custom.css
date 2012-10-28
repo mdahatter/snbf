@@ -225,11 +225,74 @@
 	background-position:0 -27px;
 }
 
+
 .checkbox {
 	margin:0;
 	padding:0;
 	vertical-align:top;
 }
+
+#campos .aui-field-choice {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:290px;
+	height:20px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#campos select {
+	color: #333333;
+	font-size: 15px;
+	height:20px;
+	float:left;
+	border: 1px #B9BABD inset;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#campos .aui-field-input {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:290px;
+	height:20px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#campos .aui-field-label {
+	color: #009900;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+#campos .aui-column-content {
+	color: #009900;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+#campos .aui-button-input {
+	color:#FFF;
+	font-size:14px;
+	width:95px;
+	height:35px;
+	background-image: url(../images/btCancelar_v1.png);
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
 .camposLogin {
 	color: #333333;
 	font-size: 15px;
