@@ -78,7 +78,7 @@ public class EditMessageAction extends PortletAction {
 
 		try {
 			MBMessage message = null;
-			System.out.println("creando mensaje!");
+			System.out.println("creando mensaje! " + cmd);
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				message = updateMessage(actionRequest, actionResponse);
 			} else if (cmd.equals(Constants.DELETE)) {
@@ -179,7 +179,7 @@ public class EditMessageAction extends PortletAction {
 		PortletURL portletURL = actionResponseImpl.createRenderURL();
 
 		portletURL
-				.setParameter("struts_action", "/ideas/view_message");
+				.setParameter("struts_action", "/ideas/view");
 		portletURL.setParameter("messageId",
 				String.valueOf(message.getMessageId()));
 
@@ -255,6 +255,7 @@ public class EditMessageAction extends PortletAction {
 	protected MBMessage updateMessage(ActionRequest actionRequest,
 			ActionResponse actionResponse) throws Exception {
 
+		System.out.println("updateMessage");
 		PortletPreferences preferences = actionRequest.getPreferences();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest
