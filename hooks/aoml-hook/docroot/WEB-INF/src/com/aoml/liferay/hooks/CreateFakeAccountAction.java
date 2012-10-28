@@ -174,7 +174,8 @@ public class CreateFakeAccountAction extends BaseStrutsPortletAction {
 	public String render(StrutsPortletAction originalStrutsPortletAction,
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse) throws Exception {
-		System.out.println("Wrapped por Andrés Mantilla");
+		
+		
 		return originalStrutsPortletAction.render(null, portletConfig,
 				renderRequest, renderResponse);
 	}
@@ -295,9 +296,13 @@ public class CreateFakeAccountAction extends BaseStrutsPortletAction {
 		// redirect = loginURL.toString();
 		// }
 		
-		redirect = "/web/guest/home";
-		System.out.println(redirect);
+		redirect = ParamUtil.getString(actionRequest, "redirect");
 
+		if (Validator.isNotNull(redirect)) {
+			redirect = PortalUtil.escapeRedirect(redirect);
+		}
+		
+		System.out.println(redirect);
 		actionResponse.sendRedirect(redirect);
 	}
 

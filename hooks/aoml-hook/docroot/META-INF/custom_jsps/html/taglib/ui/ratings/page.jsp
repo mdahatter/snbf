@@ -181,15 +181,15 @@
 									label='<%=(yourScore == -1) ? "you-have-rated-this-as-bad"
 										: "rate-this-as-bad"%>'
 									name="ratingThumb" type="radio" value="down"  />
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:icon image="add_user" message="create-account"
+									url="<%=PortalUtil.getCreateAccountURL(
+														request, themeDisplay)%>" />
+							</c:otherwise>
+						</c:choose>					
 					</div>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:icon image="add_user" message="create-account"
-					url="<%=PortalUtil.getCreateAccountURL(
-										request, themeDisplay)%>" />
-			</c:otherwise>
-		</c:choose>
 		</c:when>
 		</c:choose>
 	</div>
