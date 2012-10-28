@@ -97,14 +97,14 @@
 	height:25px;
 	background:url(../images/btRecientes.jpg) no-repeat;
 	float:left;
-	margin: 0 0 0 50px;
+	margin: 0 0 0 2px;
 }
 .btMasVotadas a {
 	width:120px;
 	height:25px;
 	background:url(../images/btMasVotadas.jpg) no-repeat;
 	float:left;
-	margin: 0 0 0 2px;
+	margin: 0 0 0 50px;
 }
 .btRecientes a:hover, .btMasVotadas a:hover {
 	background-position:0 -25px;
