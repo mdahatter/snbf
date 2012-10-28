@@ -15,9 +15,21 @@
 --%>
 
 <%@ include file="/html/portlet/login/init.jsp" %>
+<div class="contNinos"> <img src="/snbf_theme-theme/images/titReistrate.png" width="363" height="77" />
+
+    <div class="contScroll">
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+
+
+if(themeDisplay.isSignedIn()) {
+	if(redirect != null && redirect.length() > 0) {
+		System.out.println(redirect);
+		out.write("<script>document.location=\"" + redirect + "\";</script>");
+	}
+}
+		 
 
 String openId = ParamUtil.getString(request, "openId");
 
@@ -36,7 +48,7 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 	<portlet:param name="saveLastPath" value="0" />
 	<portlet:param name="struts_action" value="/login/create_account" />
 </portlet:actionURL>
-
+<p><span class="celdasTitnegro">Ingresa los datos que se relacionan a continuación, para quedar registrado en nuestra página:</span></p>
 <aui:form action="<%= createAccoutURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
@@ -116,23 +128,23 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 	</c:if>
 
 	<aui:model-context model="<%= Contact.class %>" />
-
+	<div id="campos">
 	<aui:fieldset>
 		<aui:column>
-			<aui:input model="<%= User.class %>" name="firstName" />
+			<aui:input model="<%= User.class %>" name="firstName"  />
 
 			<c:if test="<%= !PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE) %>">
 				<aui:input model="<%= User.class %>" name="screenName" />
 			</c:if>
 
 			<%-- /**Personalización por Andrés Mantilla*/ --%>
-			<liferay-ui:custom-attribute className="<%= User.class.getName() %>"
+			<liferay-ui:custom-attribute className="<%= User.class.getName() %>" 
 			    classPK="<%= 0 %>"
 			    editable="<%= true %>"
 			    label="<%= true %>" name="Departamento">
 			</liferay-ui:custom-attribute>
 
-			<liferay-ui:message key="registro-mensaje-correo" />
+			<liferay-ui:message key="registro-mensaje-correo"  />
 
 			<aui:input model="<%= User.class %>" name="emailAddress">
 				<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED, PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) %>">
@@ -187,7 +199,9 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 
 	<aui:button-row>
 		<aui:button type="submit" />
+		<aui:button href="<%= PortalUtil.getHomeURL(request) %>" type="cancel" />
 	</aui:button-row>
+	</div>
 </aui:form>
 
 <liferay-util:include page="/html/portlet/login/navigation.jsp" />
@@ -197,3 +211,6 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />firstName);
 	</aui:script>
 </c:if>
+
+	</div>
+</div>
