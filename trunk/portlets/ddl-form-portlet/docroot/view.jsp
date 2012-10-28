@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.liferay.ddlform.util.DDLSurveyConstants"%>
 <%@page import="com.liferay.portal.service.UserLocalServiceUtil"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Iterator"%>
@@ -26,20 +27,47 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 
-
-
 	String userid = (String) request.getRemoteUser();
 	com.liferay.portal.model.User usuarioLogueado = UserLocalServiceUtil.getUserById(Long.parseLong(userid));
-	String edad = (String) usuarioLogueado.getExpandoBridge().getAttribute("edad");
+	
+	String edad = ((String[]) usuarioLogueado.getExpandoBridge().getAttribute("Edad"))[0];
+	
+	//System.out.println("edad:" + edad);
 	
 	if(edad == null)
 	{
-		edad = "DDL"; //TODO: Valor por defecto real
+	
+		edad = DDLSurveyConstants.NINOS;
+		
+	} else 	{
+	
+		int edadInt = Integer.parseInt(edad);
+		
+		if (edadInt <= DDLSurveyConstants.NINOS_EDAD_MAX) {
+		
+			edad = DDLSurveyConstants.NINOS;
+			
+		} else if (edadInt >= DDLSurveyConstants.ADOLESCENTES_EDAD_MIN && 
+					edadInt <= DDLSurveyConstants.ADOLESCENTES_EDAD_MAX) {
+					
+			edad = DDLSurveyConstants.ADOLESCENTES;
+			
+		} else if (edadInt >= DDLSurveyConstants.JOVENES_EDAD_MAX) {
+		
+			edad = DDLSurveyConstants.ADOLESCENTES;
+			
+		} else {
+		
+			edad = DDLSurveyConstants.NINOS;
+			
+		}
+		
+		
 	}
 	
 	List<DDLRecordSet> listaDDL = DDLRecordSetLocalServiceUtil.getRecordSets(scopeGroupId);
 	List<DDLRecordSet> newListaDDL = new  ArrayList<DDLRecordSet>();
-	System.out.println("total:" + DDLRecordSetLocalServiceUtil.getRecordSetsCount(scopeGroupId));
+	//System.out.println("total:" + DDLRecordSetLocalServiceUtil.getRecordSetsCount(scopeGroupId));
 	
 	
 	for (int i = 0; i < listaDDL.size(); i++){
@@ -50,7 +78,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 	
 	int randomNumber = 0 + (int)(Math.random() * newListaDDL.size() );
-	System.out.println("Nuevo Arreglo Tam:" + newListaDDL.size() + ", Random Escogido:" + randomNumber);
+	//System.out.println("Nuevo Arreglo Tam:" + newListaDDL.size() + ", Random Escogido:" + randomNumber);
 
 
 DDLRecordSet recordSet = null;
@@ -65,13 +93,20 @@ try {
 	
 %>
 
+<div class="contNinos"> 
+<img src="/snbf_theme-theme/images/titEncuesta.png" width="403" height="77" />
+<div class="contScroll">
+
+
 	<c:choose>
 		<c:when test="<%= (recordSet != null) %>">
 			<portlet:actionURL var="saveDataURL">
 				<portlet:param name="<%= ActionRequest.ACTION_NAME %>" value="saveData" />
 			</portlet:actionURL>
 
+
 			<aui:form action="<%= saveDataURL %>" cssClass="lfr-dynamic-form" method="post" name="fm">
+			
 				<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 				<aui:input name="recordSetId" type="hidden" value="<%= recordSet.getRecordSetId() %>" />
 				<aui:input name="multipleSubmissions" type="hidden" value="<%= multipleSubmissions %>" />
@@ -79,10 +114,6 @@ try {
 
 				<liferay-ui:error exception="<%= DuplicateSubmissionException.class %>" message="you-may-only-submit-the-form-once" />
 				<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
-
-
-
-
 
 				<c:choose>
 					<c:when test="<%= (themeDisplay.isSignedIn() || multipleSubmissions) && permissionChecker.hasPermission(scopeGroupId, DDLRecordSet.class.getName(), recordSetId, ActionKeys.VIEW) %>">
@@ -92,7 +123,8 @@ try {
 									<liferay-ui:message key="you-do-not-have-the-required-permissions" />
 								</div>
 							</c:when>
-							<c:when test="<%= multipleSubmissions || !(DDLFormUtil.hasSubmitted(request, recordSet.getRecordSetId())) %>">
+							<c:when test="<%= multipleSubmissions || !(DDLFormUtil.hasSubmittedSurvey(request, newListaDDL)) %>">
+								<p class="celdasTit"><br>Contesta las siguientes cuatro preguntas sobre cómo viven en Colombia los niños, niñas, adolescetes y jóvenes, como tú.</p>
 								<aui:fieldset>
 
 									<%
@@ -112,13 +144,15 @@ try {
 									<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), locale) %>
 
 									<aui:button-row>
-										<aui:button onClick='<%= renderResponse.getNamespace() + "publishRecord();" %>' type="submit" value="send" />
+										<aui:button onClick='<%= renderResponse.getNamespace() + "publishRecord();" %>' type="submit" value="send" cssClass="btStandard" />
 									</aui:button-row>
 								</aui:fieldset>
 							</c:when>
 							<c:otherwise>
+								<br><br><br>
 								<div class="portlet-msg-info">
-									<liferay-ui:message key="your-form-has-already-been-submitted" />
+									<p class="celdasTit"><br>Ya respondiste la consulta, gracias por tu participación!</p>
+									<!--  <liferay-ui:message key="your-form-has-already-been-submitted" /> -->
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -129,7 +163,10 @@ try {
 						</div>
 					</c:otherwise>
 				</c:choose>
+				
+				
 			</aui:form>
+
 		</c:when>
 		<c:otherwise>
 
@@ -144,6 +181,12 @@ try {
 			</div>
 		</c:otherwise>
 	</c:choose>
+
+
+</div>
+</div>
+				
+
 
 <%
 }
