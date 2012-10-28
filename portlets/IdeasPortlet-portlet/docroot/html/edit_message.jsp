@@ -1,19 +1,3 @@
-<%--
-/**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
- *
- * This library is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either version 2.1 of the License, or (at your option)
- * any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- */
---%>
-
 <%@ include file="/html/init.jsp" %>
 
 <%
@@ -147,6 +131,10 @@ if (Validator.isNull(redirect)) {
 <portlet:actionURL var="editMessageURL">
 	<portlet:param name="struts_action" value="/ideas/edit_message" />
 </portlet:actionURL>
+    <div class="contNinos"> <img src="/IdeasPortlet-portlet/images/titRegistroIdea.png" width="403" height="77" />
+
+    <div class="contScroll">
+		<p class="celdasTitnegro">Incluye el nombre y la descripción de tu idea:</p>
 
 <aui:form action="<%= editMessageURL %>" enctype='<%= attachments ? "multipart/form-data" : "" %>' method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage(false);" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
@@ -227,7 +215,7 @@ if (Validator.isNull(redirect)) {
 		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
-
+      </div>
 <aui:script>
 	function <portlet:namespace />getSuggestionsContent() {
 		var content = '';

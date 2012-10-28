@@ -11,8 +11,8 @@ if (Validator.isNull(displayStyle)) {
 	displayStyle = MBCategoryConstants.DEFAULT_DISPLAY_STYLE;
 }
 %>
-
-<div class="displayStyle-default">
+    <div class="contNinos"><img src="/IdeasPortlet-portlet/images/titIdeas.png" width="403" height="77" />
+      <div class="contScroll">
 <%
 themeDisplay.setIncludeServiceJs(true);
 
@@ -76,32 +76,7 @@ MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDispla
 	</c:otherwise>
 </c:choose>
 
-<div class="thread-controls">
-	<div class="thread-actions">
-		<table class="lfr-table">
-		<tr>
-			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, (category != null) ? category.getCategoryId() : MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, ActionKeys.ADD_MESSAGE) %>">
-				<td>
-					<portlet:renderURL var="addMessageURL">
-						<portlet:param name="struts_action" value="/ideas/edit_message" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="mbCategoryId" value="<%= (category != null) ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
-					</portlet:renderURL>
 
-					<liferay-ui:icon
-						image="post"
-						label="<%= true %>"
-						message="post-new-thread"
-						url="<%= addMessageURL %>"
-					/>
-				</td>
-			</c:if>
-		</tr>
-		</table>
-	</div>
-
-	<div class="clear"></div>
-</div>
 
 <div>
 	<%
@@ -122,7 +97,6 @@ MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDispla
 
 	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
 
-	<c:if test="<%= threadView.equals(MBThreadConstants.THREAD_VIEW_COMBINATION) && (messages.size() > 1) %>">
 		<liferay-ui:toggle-area id="toggle_id_message_boards_view_message_thread">
 			<table class="toggle_id_message_boards_view_message_thread">
 
@@ -141,7 +115,6 @@ MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDispla
 
 			</table>
 		</liferay-ui:toggle-area>
-	</c:if>
 
 	<%
 	boolean viewableThread = false;
@@ -178,6 +151,8 @@ MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDispla
 			<liferay-ui:message key="you-do-not-have-permission-to-access-the-requested-resource" />
 		</div>
 	</c:if>
+</div>
+</div>
 </div>
 
 

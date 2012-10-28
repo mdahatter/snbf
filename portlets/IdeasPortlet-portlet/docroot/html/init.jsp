@@ -172,6 +172,9 @@ page import="javax.portlet.WindowState" %>
 <%@ page import="com.liferay.portal.kernel.util.StringBundler" %>
 <%@ page import="com.liferay.portal.kernel.util.MathUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
+<%@ page import="com.liferay.portal.util.Portal" %>
+<%@ page import="com.aoml.portlets.ideas.MessageVotesComparator" %>
+
 
 <portlet:defineObjects />
 <liferay-theme:defineObjects />

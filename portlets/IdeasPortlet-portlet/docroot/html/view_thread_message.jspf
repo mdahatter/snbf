@@ -3,15 +3,22 @@
 
 	<table class="thread-message-view <%= className %>" id="<portlet:namespace />message_<%= message.getMessageId() %>" width="100%">
 	<tr>
-		<td class="lfr-top">
-			<div class="thread-top float-container">
-				<div class="subject">
-					<strong><%= HtmlUtil.escape(message.getSubject()) %></strong>&nbsp;&nbsp;&nbsp;(<%=HtmlUtil.escape(PortalUtil.getUserName(
-																		message.getUserId(),
-																		message.getUserName()))%>)
-
-					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
-
+			<div class="idea">
+				<!-- Inicio hook AM -->
+				<h1><%=	message.getSubject()%></h1>
+				<h2><%=HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(),message.getUserName()))%> | <%=dateFormatDateTime.format(message.getModifiedDate())%></h2>
+						<portlet:renderURL var="replyURL">
+							<portlet:param name="struts_action" value="/ideas/edit_message" />
+							<portlet:param name="redirect" value="<%= currentURL %>" />
+							<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
+							<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
+							<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
+						</portlet:renderURL>
+				<div class="btComentar"><a href="<%=replyURL%>"></a></div>
+					Comentarios: <%=String.valueOf(thread.getMessageCount())%> <br/>
+					<liferay-ui:ratings className="<%=MBMessage.class.getName()%>"
+													classPK="<%=message.getMessageId()%>" type="thumbs" />
+	
 					<c:if test="<%= (message != null) && !message.isApproved() %>">
 						<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />
 
@@ -40,7 +47,7 @@
 
 						<%= LanguageUtil.format(pageContext, "posted-as-a-reply-to", author) %>
 					</c:if>
-				</div>
+
 
 				<c:if test="<%= editable %>">
 
@@ -55,46 +62,10 @@
 					}
 					%>
 
-					<c:if test="<%= showAnswerFlag || hasReplyPermission %>">
-						<ul class="edit-controls lfr-component">
-							<li class="<%= showAnswerFlag ? "" : "aui-helper-hidden" %>" id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
-
-								<%
-								String taglibMarkAsAnswerURL = "javascript:" + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');";
-								%>
-
-								<liferay-ui:icon
-									image="checked"
-									label="<%= true %>"
-									message="mark-as-an-answer"
-									url="<%= taglibMarkAsAnswerURL %>"
-								/>
-							</li>
-
-							<c:if test="<%= hasReplyPermission && !thread.isLocked() %>">
-								<li>
-									<portlet:renderURL var="replyURL">
-										<portlet:param name="struts_action" value="/ideas/edit_message" />
-										<portlet:param name="redirect" value="<%= currentURL %>" />
-										<portlet:param name="mbCategoryId" value="<%= String.valueOf(message.getCategoryId()) %>" />
-										<portlet:param name="threadId" value="<%= String.valueOf(message.getThreadId()) %>" />
-										<portlet:param name="parentMessageId" value="<%= String.valueOf(message.getMessageId()) %>" />
-									</portlet:renderURL>
-
-									<liferay-ui:icon
-										image="reply"
-										label="<%= true %>"
-										url="<%= replyURL %>"
-									/>
-								</li>
-							</c:if>
-						</ul>
-					</c:if>
 				</c:if>
-			</div>
 
-			<div class="thread-body">
-
+				<br/><br/>
+				<p>
 				<%
 				String msgBody = StringPool.BLANK;
 
@@ -108,7 +79,7 @@
 				%>
 
 				<%= msgBody %>
-
+				</p>
 			</div>
 		</td>
 	</tr>
@@ -116,16 +87,7 @@
 	<c:if test="<%= editable %>">
 		<tr>
 			<td class="thread-bottom">
-				<c:if test="<%= enableRatings %>">
-					<liferay-ui:ratings
-						className="<%= MBMessage.class.getName() %>"
-						classPK="<%= message.getMessageId() %>"
-						type="thumbs"
-					/>
-				</c:if>
-
-				<br />
-
+				
 				<div class="entry-links">
 					<liferay-ui:asset-links
 						className="<%= MBMessage.class.getName() %>"
