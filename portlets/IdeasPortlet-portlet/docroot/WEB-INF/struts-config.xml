@@ -21,6 +21,9 @@
 		<action path="/ideas/edit" type="com.aoml.portlets.ideas.EditPreferencesAction">
 			<forward name="portlet.ideas.edit" path="portlet.ideas.edit" />
 		</action>
+		<action path="/ideas/vote" type="com.aoml.portlets.ideas.VoteAction">
+			<forward name="portlet.ideas.view" path="portlet.ideas.view" />
+		</action>
 	</action-mappings>
 
 	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"></controller>

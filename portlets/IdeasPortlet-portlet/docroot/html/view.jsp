@@ -141,35 +141,8 @@
 										%>
 										<%=msgBody%>&nbsp;<a href="<%=rowURL%>"><%=LanguageUtil.get(pageContext, "more")%>&raquo;</a>
 									</p>
-									<c:choose>
-										<c:when test="<%=themeDisplay.isSignedIn()%>">
-											<portlet:renderURL var="replyURL">
-												<portlet:param name="struts_action"
-													value="/ideas/edit_message" />
-												<portlet:param name="redirect" value="<%=currentURL%>" />
-												<portlet:param name="mbCategoryId"
-													value="<%=String.valueOf(message.getCategoryId())%>" />
-												<portlet:param name="threadId"
-													value="<%=String.valueOf(message.getThreadId())%>" />
-												<portlet:param name="parentMessageId"
-													value="<%=String.valueOf(message.getMessageId())%>" />
-											</portlet:renderURL>
-											<div class="btComentar">
-												<a href="<%=replyURL%>"></a>
-											</div>
-										</c:when>
-										<c:otherwise>
-											<div class="btComentar">
-												<a
-													href="<%=PortalUtil.getCreateAccountURL(request, themeDisplay)%>"></a>
-											</div>
-										</c:otherwise>
-									</c:choose>
-									Comentarios:
-									<%=String.valueOf(thread.getMessageCount())%>
-									<br />
-									<liferay-ui:ratings className="<%=MBMessage.class.getName()%>"
-										classPK="<%=message.getMessageId()%>" type="thumbs" />
+					<%@ include file="/html/ratings.jsp"%>
+
 								</div>
 							</liferay-ui:search-container-row>
 
@@ -290,35 +263,7 @@
 						%>
 						<%=msgBody%>&nbsp;<a href="<%=rowURL%>"><%=LanguageUtil.get(pageContext, "more")%>&raquo;</a>
 					</p>
-					<c:choose>
-						<c:when test="<%=themeDisplay.isSignedIn()%>">
-							<portlet:renderURL var="replyURL">
-								<portlet:param name="struts_action"
-									value="/ideas/edit_message" />
-								<portlet:param name="redirect" value="<%=currentURL%>" />
-								<portlet:param name="mbCategoryId"
-									value="<%=String.valueOf(message.getCategoryId())%>" />
-								<portlet:param name="threadId"
-									value="<%=String.valueOf(message.getThreadId())%>" />
-								<portlet:param name="parentMessageId"
-									value="<%=String.valueOf(message.getMessageId())%>" />
-							</portlet:renderURL>
-							<div class="btComentar">
-								<a href="<%=replyURL%>"></a>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div class="btComentar">
-								<a
-									href="<%=PortalUtil.getCreateAccountURL(request, themeDisplay)%>"></a>
-							</div>
-						</c:otherwise>
-					</c:choose>
-					Comentarios:
-					<%=String.valueOf(thread.getMessageCount())%>
-					<br />
-					<liferay-ui:ratings className="<%=MBMessage.class.getName()%>"
-						classPK="<%=message.getMessageId()%>" type="thumbs" />
+					<%@ include file="/html/ratings.jsp"%>
 				</div>
 			</liferay-ui:search-container-row>
 
