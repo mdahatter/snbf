@@ -124,7 +124,7 @@ try {
 								</div>
 							</c:when>
 							<c:when test="<%= multipleSubmissions || !(DDLFormUtil.hasSubmittedSurvey(request, newListaDDL)) %>">
-								<p class="celdasTit"><br>Contesta las siguientes cuatro preguntas sobre cómo viven en Colombia los niños, niñas, adolescetes y jóvenes, como tú.</p>
+								<p class="celdasTit"><br>Contesta las siguientes cuatro preguntas sobre cómo viven en Colombia los niños, niñas, adolescentes y jóvenes, como tú.</p>
 								<aui:fieldset>
 
 									<%
@@ -150,8 +150,13 @@ try {
 							</c:when>
 							<c:otherwise>
 								<br><br><br>
-								<div class="portlet-msg-info">
-									<p class="celdasTit"><br>Ya respondiste la consulta, gracias por tu participación!</p>
+								
+									<table width="685" border="0" align="center" cellpadding="0" cellspacing="0">
+									          <tbody><tr>
+									      <td width="360" height="310" valign="bottom"><img src="/snbf_theme-theme/images/gracias.png" width="710" height="291"></td>
+									      </tr>
+									  </tbody></table>
+
 									<!--  <liferay-ui:message key="your-form-has-already-been-submitted" /> -->
 								</div>
 							</c:otherwise>
