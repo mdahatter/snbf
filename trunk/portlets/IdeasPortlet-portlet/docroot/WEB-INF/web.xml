@@ -34,13 +34,4 @@
 		<servlet-name>PortletActionServlet</servlet-name>
 		<url-pattern>/portlet_action/*</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>VoteActionServlet</servlet-name>
-		<servlet-class>com.aoml.portlets.ideas.VoteActionServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>VoteActionServlet</servlet-name>
-		<url-pattern>/vote_action/registerVote</url-pattern>
-	</servlet-mapping>
 </web-app>

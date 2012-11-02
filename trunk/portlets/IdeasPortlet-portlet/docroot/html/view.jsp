@@ -28,7 +28,7 @@
 
 	String displayStyle = BeanPropertiesUtil.getString(category, "displayStyle", MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
 
-	MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(19, catId);
+	MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(10856, catId);
 
 	System.out.println(categoryDisplay.getAllCategories());
 	System.out.println(topLink);
