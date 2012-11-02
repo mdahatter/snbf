@@ -1,5 +1,3 @@
-/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
-
 @import "normalize.css";
 
 /*BACKGROUND*/
@@ -33,8 +31,8 @@
 }
 /*HEADER*/
 #logo {
-	width:235px;
-	height:173px;
+	width:256px;
+	height:195px;
 	position:absolute;
 	top:10px;
 	left:15px;
@@ -42,11 +40,11 @@
 	z-index:30;
 }
 #logoICBF {
-	width:297px;
-	height:114px;
+	width:328px;
+	height:95px;
 	position:absolute;
-	top:11px;
-	left:672px;
+	top:14px;
+	left:635px;
 	background:url(../images/logoICBF.jpg);
 	z-index:30;
 }
@@ -66,16 +64,17 @@
 	width:918px;
 	height:109px;
 	background:url(../images/bkgCopyNinos.jpg) no-repeat;
-	margin:40px 0 0 5px;
+	margin:30px 0 0 3px;
 }
 .btEncuesta a {
-	width:388px;
-	height:109px;
+	width:308px;
+	height:84px;
 	float:right;
 	background:url(../images/btEncuesta.png) no-repeat;
+	margin:25px 0 0 3px;
 }
 .btEncuesta a:hover {
-	background-position:0 -109px;
+	background-position:0 -84px;
 }
 .contAdultos {
 	width: 929px;
@@ -93,14 +92,14 @@
 	margin: 5px 0 0 0;
 }
 .btRecientes a {
-	width:120px;
+	width:135px;
 	height:25px;
 	background:url(../images/btRecientes.jpg) no-repeat;
 	float:left;
 	margin: 0 0 0 2px;
 }
 .btMasVotadas a {
-	width:120px;
+	width:156px;
 	height:25px;
 	background:url(../images/btMasVotadas.jpg) no-repeat;
 	float:left;
@@ -132,14 +131,14 @@
 	background-position:0 -91px;
 }
 .btRegistroNinos a{
-	width:310px;
-	height:75px;
+	width:473px;
+	height:92px;
 	background:url(../images/btRegistroNinos.jpg) no-repeat;
 	float:left;
-	margin: 106px 0 0 317px;
+	margin: 63px 0 0 258px;
 }
 .btRegistroNinos a:hover{
-	background-position:0 -75px;
+	background-position:0 -92px;
 }
 .btParticipar a{
 	width:96px;
@@ -203,10 +202,16 @@
 	padding: 3px 0 3px 0;
 }
 .idea span {
-	font-size:12px;
+	font-size:10px;
 	color:#D0111F;
 	margin:10px 0 10px 0;
 }
+
+.idea  a {
+	font-size:10px;
+	color:#D0111F;
+	}
+
 .idea .btMegusta a {
 	width:75px;
 	height:27px;
@@ -225,74 +230,11 @@
 	background-position:0 -27px;
 }
 
-
 .checkbox {
 	margin:0;
 	padding:0;
 	vertical-align:top;
 }
-
-#campos .aui-field-choice {
-	color: #333333;
-	font-size: 15px;
-	text-indent:5px;
-	width:290px;
-	height:20px;
-	border: 1px #B9BABD inset;
-	border-radius: 5px;
-	-ms-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-#campos select {
-	color: #333333;
-	font-size: 15px;
-	height:20px;
-	float:left;
-	border: 1px #B9BABD inset;
-	-ms-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-#campos .aui-field-input {
-	color: #333333;
-	font-size: 15px;
-	text-indent:5px;
-	width:290px;
-	height:20px;
-	border: 1px #B9BABD inset;
-	border-radius: 5px;
-	-ms-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-#campos .aui-field-label {
-	color: #009900;
-	font-size: 14px;
-	font-weight: normal;
-}
-
-#campos .aui-column-content {
-	color: #009900;
-	font-size: 14px;
-	font-weight: normal;
-}
-
-#campos .aui-button-input {
-	color:#FFF;
-	font-size:14px;
-	width:95px;
-	height:35px;
-	background-image: url(../images/btCancelar_v1.png);
-	border-top-style: none;
-	border-right-style: none;
-	border-bottom-style: none;
-	border-left-style: none;
-}
-
 .camposLogin {
 	color: #333333;
 	font-size: 15px;
@@ -305,6 +247,7 @@
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 }
+
 
 
 .textarea {
@@ -355,6 +298,22 @@
 .btStandard a:hover{
 	background-position:0 -70px;
 }	
+.contGracias {
+	width: 710px;
+	height:291px;
+	font-weight: bold;
+	color: #D01120;
+	background-image: url(../images/gracias.jpg);
+	background-repeat: no-repeat;
+}
+.contGraciasLet {
+	font-weight: bold;
+	color: #D01120;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	padding-left:30px;
+	text-align: center;
+}
 /*FOOTER*/
 #footer {
 	width:590px;
@@ -398,4 +357,10 @@
 
 #share .btShareYoutube a:hover, #share .btShareTwitter a:hover, #share .btShareFacebook a:hover  {
 	background-position:0 -57px;
+}
+
+.bordeComentar { 
+	border-width: 2px; 
+	border-style: solid;
+	border-color: #D0111F; 
 }
