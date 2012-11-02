@@ -128,7 +128,7 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 	</c:if>
 
 	<aui:model-context model="<%= Contact.class %>" />
-	<div id="campos">
+	<div id="camposLogin">
 	<aui:fieldset>
 		<aui:column>
 			<aui:input model="<%= User.class %>" name="firstName"  />
