@@ -300,6 +300,8 @@ public class CreateFakeAccountAction extends BaseStrutsPortletAction {
 
 		if (Validator.isNotNull(redirect)) {
 			redirect = PortalUtil.escapeRedirect(redirect);
+		} else {
+			redirect = PortalUtil.getHomeURL(request);
 		}
 		
 		System.out.println(redirect);
