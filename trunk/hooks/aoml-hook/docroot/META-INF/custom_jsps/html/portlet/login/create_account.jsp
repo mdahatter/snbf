@@ -144,13 +144,12 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 			    label="<%= true %>" name="Departamento">
 			</liferay-ui:custom-attribute>
 
-			<liferay-ui:message key="registro-mensaje-correo"  />
+			<liferay-ui:custom-attribute className="<%= User.class.getName() %>" 
+			    classPK="<%= 0 %>"
+			    editable="<%= true %>"
+			    label="<%= true %>" name="Tu Te Consideras">
+			</liferay-ui:custom-attribute>
 
-			<aui:input model="<%= User.class %>" name="emailAddress">
-				<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED, PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) %>">
-					<aui:validator name="required" />
-				</c:if>
-			</aui:input>
 		</aui:column>
 
 		<aui:column>
@@ -181,6 +180,11 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 					<aui:option label="female" selected="<%= !male %>" value="0" />
 				</aui:select>
 			</c:if>
+			<liferay-ui:custom-attribute className="<%= User.class.getName() %>" 
+			    classPK="<%= 0 %>"
+			    editable="<%= true %>"
+			    label="<%= true %>" name="Género">
+			</liferay-ui:custom-attribute>
 			<%-- /**Personalización por Andrés Mantilla*/ --%>
 			<liferay-ui:custom-attribute className="<%= User.class.getName() %>"
 			    classPK="<%= 0 %>"
@@ -194,6 +198,13 @@ boolean male = ParamUtil.getBoolean(request, "male", true);
 
 				<liferay-ui:captcha url="<%= captchaURL %>" />
 			</c:if>
+			<liferay-ui:message key="registro-mensaje-correo"  />
+
+			<aui:input model="<%= User.class %>" name="emailAddress">
+				<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED, PropsValues.USERS_EMAIL_ADDRESS_REQUIRED) %>">
+					<aui:validator name="required" />
+				</c:if>
+			</aui:input>
 		</aui:column>
 	</aui:fieldset>
 
