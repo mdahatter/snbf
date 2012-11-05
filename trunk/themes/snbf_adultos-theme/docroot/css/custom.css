@@ -1,0 +1,339 @@
+@import "normalize.css";
+
+/*BACKGROUND*/
+#bkgNinos {
+	width:100%;
+	height:1164px;
+	position:absolute;
+	top:0;
+	left:0;
+	background:url(../images/bkgGreen.jpg) no-repeat center top;
+	z-index:10;
+}
+
+/*CONTENEDOR*/
+#wrapper {
+	width:990px;
+	height:1164px;
+	position:relative;
+	top:0;
+	left:50%;
+	margin-left:-495px;
+	z-index:20;
+}
+/*HEADER*/
+#logo {
+	width:256px;
+	height:195px;
+	position:absolute;
+	top:10px;
+	left:15px;
+	background:url(../images/logo.png);
+	z-index:30;
+}
+#logoICBF {
+	width:328px;
+	height:95px;
+	position:absolute;
+	top:14px;
+	left:635px;
+	background:url(../images/logoICBF.jpg);
+	z-index:30;
+}
+/*CONTENIDO*/
+#content {
+	width:929px;
+	height:890px;
+	position:absolute;
+	top:184px;
+	left:32px;
+	/*border:#FF0000 1px solid;*/
+}
+.copyNinos {
+	margin:50px 0 20px 0;
+}
+
+.btEncuesta a {
+	width:308px;
+	height:84px;
+	float:right;
+	background:url(../images/btEncuesta.png) no-repeat;
+	margin:25px 0 0 3px;
+}
+.btEncuesta a:hover {
+	background-position:0 -84px;
+}
+.contNinos {
+	width: 929px;
+	height:706px;
+	background:url(../images/bkgAdultos.png) no-repeat;
+	margin: 20px 0 0 0;
+}
+
+.contFrame img {
+	margin: 5px 0 0 0;
+}
+.btRecientes a {
+	width:135px;
+	height:25px;
+	background:url(../images/btRecientes.jpg) no-repeat;
+	float:left;
+	margin: 0 0 0 2px;
+}
+.btMasVotadas a {
+	width:156px;
+	height:25px;
+	background:url(../images/btMasVotadas.jpg) no-repeat;
+	float:left;
+	margin: 0 0 0 50px;
+}
+.btRecientes a:hover, .btMasVotadas a:hover {
+	background-position:0 -25px;
+}
+.active {
+	background-position:0 -55px;
+}
+.contScroll {
+	width:770px;
+	height:370px;
+	float:left;
+	margin: 0 0 0 50px;
+	overflow:auto;
+	border:#CCCCCC 1px solid;
+	padding:0 30px 0 20px ;
+}
+.btRegistroNinos a{
+	width:176px;
+	height:91px;
+	background:url(../images/btRegistroJovenes.jpg) no-repeat;
+	float:left;
+	margin: 30px 0 0 395px;
+}
+.btRegistroNinos a:hover{
+	background-position:0 -91px;
+}
+
+.btParticipar a{
+	width:96px;
+	height:35px;
+	background-image: url(../images/btParticipar.png);
+	background-repeat: no-repeat;
+}
+.btParticipar a:hover{
+	background-position:0 -70px;
+
+}
+.idea {
+	border-bottom:#CCC 1px dotted;
+	padding: 10px 0 20px 0;
+}
+.idea h1, .idea h2, .idea h3, .celdasTit, .camposLogin, .celdasTitnegro, .btStandard, .celdasTitnegropeq, .idea p, .idea span, .idea ul{
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.celdasTit{
+	color: #009900;
+	font-size: 14px;
+}
+.celdasTitnegro{
+	color: #5F5F5F;
+	font-size: 14px;
+}
+
+.idea h1 {
+	font-size:20px;
+	color:#009900;
+	margin:0;
+	padding:0;
+}
+.idea h2 {
+	font-size:10px;
+	color:#009900;
+	margin:0;
+	padding:0;
+}
+.idea h3 {
+	font-size:16px;
+	color: #333;
+	padding:0 0 0 30px;
+	margin:20px 0 0 0;
+}
+.idea p {
+	font-size:12px;
+	color:#666;
+	line-height: 12px;
+}
+.idea ul {
+	font-size:12px;
+	color:#666;
+	line-height: 12px;
+	list-style:none;
+	padding:0 0 0 30px;
+	
+}
+.idea li {
+	padding: 3px 0 3px 0;
+}
+.idea span {
+	font-size:10px;
+	color:#D0111F;
+	margin:10px 0 10px 0;
+}
+
+.idea  a {
+	font-size:10px;
+	color:#D0111F;
+	}
+
+.idea .btMegusta a {
+	width:75px;
+	height:27px;
+	background:url(../images/btMegusta.jpg) no-repeat;
+	float:left;
+	margin: 0 5px 0 0;
+}
+.idea .btComentar a {
+	width:75px;
+	height:27px;
+	background:url(../images/btComentar.jpg) no-repeat;
+	float:left;
+	margin: 0 5px 0 0;
+}
+.idea .btMegusta a:hover, .idea .btComentar a:hover {
+	background-position:0 -27px;
+}
+
+.checkbox {
+	margin:0;
+	padding:0;
+	vertical-align:top;
+}
+.camposLogin {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:290px;
+	height:18px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+
+
+.textarea {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:650px;
+	height:100px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.texidea {
+	color: #333333;
+	font-size: 15px;
+	text-indent:5px;
+	width:650px;
+	height:20px;
+	border: 1px #B9BABD inset;
+	border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.dropdown {
+	color: #333333;
+	font-size: 13px;
+	height:20px;
+	float:left;
+	border: 1px #B9BABD inset;
+}
+.backtables {
+	background-color: #F4F4F4;
+}
+.btStandard {
+	color:#FFF;
+	font-size:14px;
+	width:95px;
+	height:35px;
+	background-image: url(../images/btCancelar_v1.png);
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+.btStandard a:hover{
+	background-position:0 -70px;
+}	
+.contGracias {
+	width: 710px;
+	height:291px;
+	font-weight: bold;
+	color: #D01120;
+	background-image: url(../images/gracias.jpg);
+	background-repeat: no-repeat;
+}
+.contGraciasLet {
+	font-weight: bold;
+	color: #D01120;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	padding-left:30px;
+	text-align: center;
+}
+/*FOOTER*/
+#footer {
+	width:590px;
+	height:60px;
+	position:absolute;
+	top:1085px;
+	left:32px;
+}
+#footer p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color: #333;
+	text-align:center;
+}
+
+#share {
+	width:170px;
+	height:57px;
+	position:absolute;
+	top:1075px;
+	left:740px;
+}
+#share .btShareYoutube a {
+	width:53px;
+	height:57px;
+	background:url(../images/btShareYoutube.png) no-repeat;
+	float:left;
+}
+#share .btShareTwitter a {
+	width:54px;
+	height:57px;
+	background:url(../images/btShareTwitter.png) no-repeat;
+	float:left;
+}
+#share .btShareFacebook a {
+	width:54px;
+	height:57px;
+	background:url(../images/btShareFacebook.png) no-repeat;
+	float:left;
+}
+
+#share .btShareYoutube a:hover, #share .btShareTwitter a:hover, #share .btShareFacebook a:hover  {
+	background-position:0 -57px;
+}
+
+.bordeComentar { 
+	border-width: 2px; 
+	border-style: solid;
+	border-color: #D0111F; 
+}
